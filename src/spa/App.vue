@@ -1,20 +1,20 @@
 <template>
   <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <p>
+      <router-link to="/">redirect Init</router-link>
+    </p>
+    <p>
+      <router-link to="/A">redirect A</router-link>
+    </p>
+    <p>
+      <router-link to="/B">redirect B</router-link>
+    </p>
+    <p>
+      <router-link to="/C">redirect C</router-link>
+    </p>
+    <router-view />
   </div>
 </template>
-
-<script>
-import HelloWorld from './views/HelloWorld.vue'
-
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
-}
-</script>
 
 <style>
 #app {

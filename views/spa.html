@@ -1,5 +1,10 @@
-<%-include("module/header",{ title })%>
+<%-include("module/header",{ 
+  title,
+  ver: HASH['spa']
+})%>
 
 <div id="app"></div>
 
-<%-include("module/footer",{ title })%>
+<%-include("module/footer",{ 
+  ver: HASH['spa']
+})%>

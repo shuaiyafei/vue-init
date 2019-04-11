@@ -1,6 +1,7 @@
 exports.renderPage = async (ctx, next) => {
-  ctx.state = {
+  console.log(ctx);
+  const data = {
     title: 'spa'
   };
-  await ctx.render('spa', ctx.state);
+  await ctx.render('spa', data);
 };

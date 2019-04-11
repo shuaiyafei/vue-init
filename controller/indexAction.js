@@ -1,6 +1,7 @@
 exports.renderPage = async (ctx, next) => {
-  ctx.state = {
+  ctx.state.title = 'index';
+  const data = {
     title: 'index'
   };
-  await ctx.render('index', ctx.state);
+  await ctx.render('index', data);
 };

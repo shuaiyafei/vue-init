@@ -10,6 +10,7 @@ const logger = require('koa-logger');
 const path = require('path');
 const ejs = require('ejs');
 const routes = require('./routes');
+const HASH = require('./utils/getHash');
 const port = process.env.PORT;
 
 // error handler
@@ -24,6 +25,12 @@ app.use(views(__dirname + '/views', {
     html: 'ejs'
   }
 }));
+app.use(async (ctx, next) => {
+  Object.assign(ctx.state, {
+    HASH
+  });
+  await next();
+});
 app.use(router.routes());
 app.use(router.allowedMethods());
 

@@ -1,6 +1,10 @@
-<%-include("module/header",{ title })%>
+<%-include("module/header",{ 
+  title,
+  ver: HASH['index']
+})%>
 
 <h1>index</h1>
 
-<%-include("module/footer",{ title })%>
-
+<%-include("module/footer",{ 
+  ver: HASH['index']
+})%>
