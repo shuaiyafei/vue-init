@@ -34,7 +34,7 @@ const createJson = (compilation) => {
   const chunkObj = compilation.chunks;
   chunkObj.forEach(item => {
     Object.assign(chunkName, {
-      [item.name]: item.hash
+      [item.name]: item.hash.substr(0, 20)
     });
   })
   return JSON.stringify(chunkName);
@@ -77,7 +77,7 @@ const options = {
       extraFiles: []
     }),
     new ExtractTextPlugin({
-      filename:'style/[chunkhash:8].[name].css'
+      filename:'style/[chunkhash].[name].css'
     })
   ]
 };
