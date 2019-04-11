@@ -1,9 +1,7 @@
+const indexAction = require('../controller/indexAction');
+const spaAction = require('../controller/spaAction');
+
 module.exports = (router) => {
-  router.get('/', async (ctx, next) => {
-    // ctx.body = 'Hello World'
-    ctx.state = {
-      title: 'Koa2'
-    }
-    await ctx.render('login', ctx.state)
-  })
-}
+  router.get('/', indexAction.renderPage);
+  router.get('/spa', spaAction.renderPage);
+};
