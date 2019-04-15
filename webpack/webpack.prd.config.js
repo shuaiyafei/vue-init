@@ -3,6 +3,8 @@ const baseWebpackConfig = require('./webpack.base.config');
 const merge = require('webpack-merge');
 const GenerateAssetPlugin = require('generate-asset-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+
 
 const createJson = (compilation) => {
   const chunkName = {};
@@ -29,10 +31,12 @@ baseWebpackConfig.module.rules.push({
 const options = merge(baseWebpackConfig, {
   mode: 'production',
   plugins: [
+    new CleanWebpackPlugin(),
     new ExtractTextPlugin({
-      filename: 'style/[chunkhash].[name].css'
+      filename: 'style/[name].css?[hash]'
     }),
     new GenerateAssetPlugin({
+      filename: 'version/prd-ver.json',
       fn: (compilation, cb) => {
         cb(null, createJson(compilation));
       }

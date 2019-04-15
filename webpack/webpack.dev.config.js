@@ -3,7 +3,6 @@ const baseWebpackConfig = require('./webpack.base.config');
 const merge = require('webpack-merge');
 const webpack = require('webpack');
 const GenerateAssetPlugin = require('generate-asset-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const createJson = (compilation) => {
@@ -14,7 +13,7 @@ const createJson = (compilation) => {
       [item.name]: item.hash.substr(0, 20)
     });
   })
-  fs.writeFile('version/dev-ver.json', JSON.stringify(chunkName), (err) => {
+  fs.writeFile('public/version/dev-ver.json', JSON.stringify(chunkName), (err) => {
     console.log('writeFile', err);
   });
   return JSON.stringify(chunkName);
@@ -31,16 +30,16 @@ baseWebpackConfig.module.rules.push({
 const options = merge(baseWebpackConfig, {
   mode: 'development',
   plugins: [
-    new CleanWebpackPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin({
-      filename: 'style/[chunkhash].[name].css'
+      filename: 'style/[name].css?[hash]'
     }),
     new GenerateAssetPlugin({
+      filename: 'version/dev-ver.json',
       fn: (compilation, cb) => {
         cb(null, createJson(compilation));
       }
-    }),
-    new webpack.HotModuleReplacementPlugin()
+    }) 
   ]
 });
 

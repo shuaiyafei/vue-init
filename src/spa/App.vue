@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <img src="./assets/test.jpg" />
     <p>
       <router-link to="/">redirect Init</router-link>
     </p>

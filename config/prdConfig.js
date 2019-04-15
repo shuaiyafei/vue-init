@@ -1,4 +1,4 @@
-const PORT = require('./portConfig');
+const portObj = require('./portConfig');
 
 new Promise((resolve, reject) => {
   Object.assign(process.env, {
@@ -7,7 +7,7 @@ new Promise((resolve, reject) => {
   });
   resolve();
 }).then(() => {
-  require('../app.js')
+  require('../app.js');
 }).catch((err) => {
   console.log(err);
 });

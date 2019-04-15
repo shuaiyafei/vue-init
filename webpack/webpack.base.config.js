@@ -11,7 +11,7 @@ entryFile.forEach(item => {
     const name = item.split('.')[0];
     if (name === 'spa') {
       Object.assign(entry, {
-        [name]: ['webpack-hot-middleware/client?reload=true', path.resolve(__dirname, `../src/${name}/main.js`)]
+        [name]: [path.resolve(__dirname, `../src/${name}/main.js`), 'webpack-hot-middleware/client?noInfo=true&reload=true']
       });
     } else {
       Object.assign(entry, {
@@ -19,11 +19,15 @@ entryFile.forEach(item => {
       });
     }
     Object.assign(output, {
-      path: `${path.resolve(__dirname, `../public`)}`,
-      filename: `script/[chunkhash].[name].js`
+      path: `${path.resolve(__dirname, `./../public`)}`,
+      filename: `script/[name].js?[hash]`,
+      publicPath: 'http://10.4.13.215:3000/'
     });
   }
 });
+
+console.log(entry);
+console.log(output);
 
 const options = {
   entry,
