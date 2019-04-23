@@ -1,6 +1,8 @@
 const Koa = require('koa');
 const Router = require('koa-router');
-const { exec } = require('child_process');
+const {
+  exec
+} = require('child_process');
 const app = new Koa();
 const router = new Router();
 const views = require('koa-views');
@@ -13,6 +15,7 @@ const ejs = require('ejs');
 const routes = require('./routes');
 const static = require('koa-static');
 const HASH = require('./utils/getHash');
+const getIp = require('./utils/getIp');
 const port = process.env.PORT;
 
 // error handler
@@ -89,5 +92,6 @@ app.on('error', function (err, ctx) {
 });
 
 module.exports = app.listen(port, () => {
-  console.log(`Listening on http://localhost:${port}`);
+  const ip = getIp();
+  console.log(`Listening on http://${ip}:${port}`);
 });
