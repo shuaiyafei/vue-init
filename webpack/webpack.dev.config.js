@@ -4,6 +4,7 @@ const merge = require('webpack-merge');
 const webpack = require('webpack');
 const GenerateAssetPlugin = require('generate-asset-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const exit = require('../utils/judgeExit');
 
 const createJson = (compilation) => {
   const chunkName = {};
@@ -12,10 +13,14 @@ const createJson = (compilation) => {
     Object.assign(chunkName, {
       [item.name]: item.hash.substr(0, 20)
     });
-  })
-  fs.writeFile('public/version/dev-ver.json', JSON.stringify(chunkName), (err) => {
-    console.log('writeFile', err);
   });
+  (async () => {
+    await exit.dirExists('public/version/dev-ver.json');
+    fs.writeFile('public/version/dev-ver.json', JSON.stringify(chunkName), (err) => {
+      console.log(err);
+      // err && console.log('writeFile', err);
+    })
+  })();
   return JSON.stringify(chunkName);
 };
 
@@ -39,7 +44,7 @@ const options = merge(baseWebpackConfig, {
       fn: (compilation, cb) => {
         cb(null, createJson(compilation));
       }
-    }) 
+    })
   ]
 });
 

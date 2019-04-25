@@ -26,9 +26,6 @@ entryFile.forEach(item => {
   }
 });
 
-console.log(entry);
-console.log(output);
-
 const options = {
   entry,
   output,
