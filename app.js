@@ -62,7 +62,7 @@ if (process.env.NODE_ENV === 'dev') {
 
 if (process.env.NODE_ENV === 'prd') {
   const webpack = require('webpack');
-  const webpackDevConfig = require('./webpack/webpack.prd.config');
+//   const webpackPrdConfig = require('./webpack/webpack.prd.config');
   const command = 'webpack --config webpack/webpack.prd.config.js';
   exec(command, (error, stdout, stderr) => {
     if (error) {
